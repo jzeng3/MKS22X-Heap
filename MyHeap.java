@@ -1,6 +1,10 @@
+import java.util.*;
+
 public class MyHeap{
   public static void main(String[] args){
-
+    int[] a = {1,7,5,3};
+    pushDown(a, 4,0);
+    System.out.println( Arrays.toString(a));
   }
   /*
      - size  is the number of elements in the data array.
@@ -14,28 +18,40 @@ public class MyHeap{
     // indices of children
     int child1 = 2*index + 1;
     int child2 = 2*index + 2;
+    int parentIndex = index;
     // while indices are valid and children are larger than element at given index
-    while (child1 < size && data[child1] > data[index]
-        || child2 < size && data[child2] > data[index]){
+    while (child1 < size && data[child1] > data[parentIndex]
+        || child2 < size && data[child2] > data[parentIndex]){
+    System.out.println("Inside while statement");
      // if there is only one child, which is larger
-      if (child2 >= size && data[child1] > data[index]){
+      if (child2 >= size && data[child1] > data[parentIndex]){
+        System.out.println("There is only 1 child, "+data[child1] );
         int temp = data[child1];
-        data[child1] = data[index];
-        data[index] = temp;
+        data[child1] = data[parentIndex];
+        data[parentIndex] = temp;
+        parentIndex = child1;
       }
      // if there are two children
      else if (child1 < size && child2 < size){
+       System.out.println("There are 2 children, "+data[child1]+", "+data[child2] );
        if (data[child1] >= data[child2]){
+          System.out.println("Child 1 is larger, "+data[child1]+" >= "+data[child2] );
          int temp = data[child1];
-         data[child1] = data[index];
-         data[index] = temp;
+         data[child1] = data[parentIndex];
+         data[parentIndex] = temp;
+         parentIndex = child1;
        }
        else{
+           System.out.println("Child 2 is larger, "+data[child2]+" > "+data[child1] );
          int temp = data[child2];
-         data[child2] = data[index];
-         data[index] = temp;
+         data[child2] = data[parentIndex];
+         data[parentIndex] = temp;
+         parentIndex = child2;
        }
      }
+     child1 = 2*parentIndex + 1;
+     child2 = child1 + 1;
+     System.out.println("New children indices: "+child1+", "+child2);
     }
   }
 /*
@@ -50,7 +66,7 @@ private static void pushUp(int[]data,int index){
 /*
     - convert the array into a valid heap. [ should be O(n) ]
     */
-public static void heapify(int[]){
+public static void heapify(int[]data){
 
 }
 
@@ -59,7 +75,7 @@ public static void heapify(int[]){
  converting it into a heap
  removing the largest value n-1 times (remove places at end of the sub-array).
  */
-public static void heapsort(int[]){
+public static void heapsort(int[]data){
 
 }
 
