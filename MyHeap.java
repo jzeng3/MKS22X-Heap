@@ -18,48 +18,56 @@ public class MyHeap{
     // indices of children
     int child1 = 2*index + 1;
     int child2 = 2*index + 2;
-    int parentIndex = index;
     // while indices are valid and children are larger than element at given index
-    while (child1 < size && data[child1] > data[parentIndex]
-        || child2 < size && data[child2] > data[parentIndex]){
-    System.out.println("Inside while statement");
+    while (child1 < size && data[child1] > data[index]
+        || child2 < size && data[child2] > data[index]){
+     //  System.out.println("Inside while statement");
      // if there is only one child, which is larger
-      if (child2 >= size && data[child1] > data[parentIndex]){
-        System.out.println("There is only 1 child, "+data[child1] );
+      if (child2 >= size && data[child1] > data[index]){
+      //  System.out.println("There is only 1 child, "+data[child1] );
         int temp = data[child1];
-        data[child1] = data[parentIndex];
-        data[parentIndex] = temp;
-        parentIndex = child1;
+        data[child1] = data[index];
+        data[index] = temp;
+        index = child1;
       }
      // if there are two children
      else if (child1 < size && child2 < size){
-       System.out.println("There are 2 children, "+data[child1]+", "+data[child2] );
+      // System.out.println("There are 2 children, "+data[child1]+", "+data[child2] );
        if (data[child1] >= data[child2]){
-          System.out.println("Child 1 is larger, "+data[child1]+" >= "+data[child2] );
+      //    System.out.println("Child 1 is larger, "+data[child1]+" >= "+data[child2] );
          int temp = data[child1];
-         data[child1] = data[parentIndex];
-         data[parentIndex] = temp;
-         parentIndex = child1;
+         data[child1] = data[index];
+         data[index] = temp;
+         index = child1;
        }
        else{
-           System.out.println("Child 2 is larger, "+data[child2]+" > "+data[child1] );
+        //   System.out.println("Child 2 is larger, "+data[child2]+" > "+data[child1] );
          int temp = data[child2];
-         data[child2] = data[parentIndex];
-         data[parentIndex] = temp;
-         parentIndex = child2;
+         data[child2] = data[index];
+         data[index] = temp;
+         index = child2;
        }
      }
-     child1 = 2*parentIndex + 1;
+     // update children indices
+     child1 = 2*index + 1;
      child2 = child1 + 1;
-     System.out.println("New children indices: "+child1+", "+child2);
+    // System.out.println("New children indices: "+child1+", "+child2);
     }
   }
 /*
-- push the element at index i up into the correct position. This will swap it with the parent node until the parent node is larger or the root is reached. [ should be O(logn) ]
+- push the element at index i up into the correct position.
+ This will swap it with the parent node until the parent node is larger or the root is reached. [ should be O(logn) ]
 - precondition: index is between 0 and data.length-1 inclusive.
 */
 private static void pushUp(int[]data,int index){
-
+  int parent = (index - 1) / 2;
+  while (parent >= 0 && data[parent] < data[index]){
+    int temp = data[parent];
+    data[parent] = data[index];
+    data[index] = temp;
+    index = parent;
+  }
+  parent = (index - 1) / 2;
 }
 
 
