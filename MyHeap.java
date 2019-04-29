@@ -4,28 +4,63 @@ public class MyHeap{
   }
   /*
      - size  is the number of elements in the data array.
-     - push the element at index i downward into the correct position. This will swap with the larger of the child nodes provided thatchild is larger. This stops when a leaf is reached, or neither child is larger. [ should be O(logn) ]
+     - push the element at index i downward into the correct position.
+       This will swap with the larger of the child nodes provided that child is larger.
+       This stops when a leaf is reached, or neither child is larger. [ should be O(logn) ]
      - precondition: index is between 0 and size-1 inclusive
      - precondition: size is between 0 and data.length-1 inclusive.
 */
-  private static void pushDown(int[]data,int size,int index)
+  private static void pushDown(int[]data,int size,int index){
+    // indices of children
+    int child1 = 2*index + 1;
+    int child2 = 2*index + 2;
+    // while indices are valid and children are larger than element at given index
+    while (child1 < size && data[child1] > data[index]
+        || child2 < size && data[child2] > data[index]){
+     // if there is only one child, which is larger
+      if (child2 >= size && data[child1] > data[index]){
+        int temp = data[child1];
+        data[child1] = data[index];
+        data[index] = temp;
+      }
+     // if there are two children
+     else if (child1 < size && child2 < size){
+       if (data[child1] >= data[child2]){
+         int temp = data[child1];
+         data[child1] = data[index];
+         data[index] = temp;
+       }
+       else{
+         int temp = data[child2];
+         data[child2] = data[index];
+         data[index] = temp;
+       }
+     }
+    }
+  }
 /*
 - push the element at index i up into the correct position. This will swap it with the parent node until the parent node is larger or the root is reached. [ should be O(logn) ]
 - precondition: index is between 0 and data.length-1 inclusive.
 */
-private static void pushUp(int[]data,int index)
+private static void pushUp(int[]data,int index){
+
+}
 
 
 /*
     - convert the array into a valid heap. [ should be O(n) ]
     */
-public static void heapify(int[])
+public static void heapify(int[]){
+
+}
 
 /*
 - sort the array [ should be O(nlogn) ] :
  converting it into a heap
  removing the largest value n-1 times (remove places at end of the sub-array).
  */
-public static void heapsort(int[])
+public static void heapsort(int[]){
+
+}
 
 }
