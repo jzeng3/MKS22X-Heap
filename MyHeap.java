@@ -2,8 +2,10 @@ import java.util.*;
 
 public class MyHeap{
   public static void main(String[] args){
-    int[] a = {1,7,5,3};
-    pushDown(a, 4,0);
+    int[] a = {1,7,5,3,9};
+    pushDown(a, 5,0);
+    System.out.println( Arrays.toString(a));
+    pushUp(a, 1);
     System.out.println( Arrays.toString(a));
   }
   /*
@@ -61,13 +63,16 @@ public class MyHeap{
 */
 private static void pushUp(int[]data,int index){
   int parent = (index - 1) / 2;
+  System.out.println("parent index: "+parent);
   while (parent >= 0 && data[parent] < data[index]){
+    System.out.println("Inside while statement");
     int temp = data[parent];
     data[parent] = data[index];
     data[index] = temp;
     index = parent;
   }
   parent = (index - 1) / 2;
+  System.out.println("updated parent index: "+parent);
 }
 
 
