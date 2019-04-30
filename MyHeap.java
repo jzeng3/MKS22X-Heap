@@ -10,6 +10,9 @@ public class MyHeap{
     int[] b = {1,3,5,7,9,10,11};
     pushUp(b, 6);
     System.out.println( Arrays.toString(b));
+    int[] c = {8,2,0,4,5,6,9};
+    heapify(c);
+    System.out.println( Arrays.toString(c));
   }
   /*
      - size  is the number of elements in the data array.
@@ -65,17 +68,19 @@ public class MyHeap{
 - precondition: index is between 0 and data.length-1 inclusive.
 */
 private static void pushUp(int[]data,int index){
+  // index of parent element
   int parent = (index - 1) / 2;
-  System.out.println("parent index: "+parent);
+  // while parent index is valid and parent element is less than element at index
   while (parent >= 0 && data[parent] < data[index]){
-    System.out.println("Inside while statement");
+  //  System.out.println("Inside while statement");
+    // swap parent and child, update parent and child indices
     int temp = data[parent];
     data[parent] = data[index];
     data[index] = temp;
     index = parent;
-    System.out.println("New index: "+index);
+  //  System.out.println("New index: "+index);
     parent = (index - 1) / 2;
-      System.out.println("updated parent index: "+parent);
+    //  System.out.println("updated parent index: "+parent);
   }
 }
 
@@ -84,7 +89,10 @@ private static void pushUp(int[]data,int index){
     - convert the array into a valid heap. [ should be O(n) ]
     */
 public static void heapify(int[]data){
-
+  for (int i = data.length - 1; i > 0; i--){
+    pushUp(data,i);
+  }
+  pushDown(data,data.length,0);
 }
 
 /*
