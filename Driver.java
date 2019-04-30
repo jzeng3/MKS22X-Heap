@@ -5,7 +5,7 @@ public class Driver{
   System.out.println("Size\t\tMax Value\tquick/builtin ratio ");
   int[]MAX_LIST = {1000000000,500,10};
   for(int MAX : MAX_LIST){
-    for(int size = 10; size < 50; size*=2){
+    for(int size = 31250; size < 2000000; size*=2){
       long qtime=0;
       long btime=0;
       //average of 5 sorts.
@@ -18,7 +18,7 @@ public class Driver{
         }
         long t1,t2;
         t1 = System.currentTimeMillis();
-        System.out.println( Arrays.toString(data2));
+      //  System.out.println( Arrays.toString(data2));
         MyHeap.heapsort(data2);
         t2 = System.currentTimeMillis();
         qtime += t2 - t1;
@@ -28,8 +28,8 @@ public class Driver{
         btime+= t2 - t1;
         if(!Arrays.equals(data1,data2)){
           System.out.println("FAIL TO SORT!");
-          System.out.println( Arrays.toString(data1));
-          System.out.println( Arrays.toString(data2));
+        //  System.out.println( Arrays.toString(data1));
+        //  System.out.println( Arrays.toString(data2));
           System.exit(0);
         }
       }

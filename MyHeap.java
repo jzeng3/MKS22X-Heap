@@ -15,7 +15,7 @@ public class MyHeap{
     System.out.println( Arrays.toString(c));
     heapsort(c);
     System.out.println( Arrays.toString(c));
-    int[] d = {47, 15, 57, 74, 19, 16, 95, 52, 26, 10};
+    int[] d = {47, 15, 57, 74, 19, 16, 95, 52, 26, 10, 17, 85, 73, 42, 5};
     heapsort(d);
     System.out.println( Arrays.toString(d));
   }
@@ -37,7 +37,7 @@ public class MyHeap{
 
      // if there is only one child, which is larger
       if (child2 >= size && data[child1] > data[index]){
-
+        // swap child and element at index and update index
         int temp = data[child1];
         data[child1] = data[index];
         data[index] = temp;
@@ -45,7 +45,7 @@ public class MyHeap{
       }
      // if there are two children
      else if (child1 < size && child2 < size){
-
+       // swap larger child and element at index and update index
        if (data[child1] >= data[child2]){
 
          int temp = data[child1];
@@ -64,7 +64,6 @@ public class MyHeap{
      // update children indices
      child1 = 2*index + 1;
      child2 = child1 + 1;
-
     }
   }
 /*
@@ -77,15 +76,13 @@ private static void pushUp(int[]data,int index){
   int parent = (index - 1) / 2;
   // while parent index is valid and parent element is less than element at index
   while (parent >= 0 && data[parent] < data[index]){
-
     // swap parent and child, update parent and child indices
     int temp = data[parent];
     data[parent] = data[index];
     data[index] = temp;
+
     index = parent;
-
     parent = (index - 1) / 2;
-
   }
 }
 
@@ -94,18 +91,15 @@ private static void pushUp(int[]data,int index){
     - convert the array into a valid heap. [ should be O(n) ]
     */
 public static void heapify(int[]data){
-  // loop through indices from last element (inclusive) to first element (exclusive)
-
+  // start from the parent of the last element
   int index = data.length - 1;
   int parent = (index - 1) / 2;
+  // while parent index is valid, push down parent
+  // loop through parents from right to left
   while (parent >= 0){
     pushDown(data,data.length, parent);
     parent -= 1;
-    System.out.println("push down: "+Arrays.toString(data));
   }
-  // for the top element, push down
-
-  System.out.println("push down: "+Arrays.toString(data));
 }
 
 /*
@@ -116,7 +110,7 @@ public static void heapify(int[]data){
 public static void heapsort(int[]data){
   // make array into a valid heap
   heapify(data);
-  System.out.println("Heap: "+Arrays.toString(data));
+
   // swap largest with last element and push down
   int size = data.length;
   // while size of unsorted heap is greater than 0
@@ -130,6 +124,7 @@ public static void heapsort(int[]data){
     // push down the element at the top of the heap
     pushDown(data,size,0);
   }
+  
 }
 
 }
