@@ -13,6 +13,8 @@ public class MyHeap{
     int[] c = {8,2,0,4,5,6,9};
     heapify(c);
     System.out.println( Arrays.toString(c));
+    heapsort(c);
+    System.out.println( Arrays.toString(c));
   }
   /*
      - size  is the number of elements in the data array.
@@ -89,9 +91,12 @@ private static void pushUp(int[]data,int index){
     - convert the array into a valid heap. [ should be O(n) ]
     */
 public static void heapify(int[]data){
+  // loop through indices from last element (inclusive) to first element (exclusive)
   for (int i = data.length - 1; i > 0; i--){
+    // push up the element at this index
     pushUp(data,i);
   }
+  // for the top element, push down
   pushDown(data,data.length,0);
 }
 
@@ -101,7 +106,19 @@ public static void heapify(int[]data){
  removing the largest value n-1 times (remove places at end of the sub-array).
  */
 public static void heapsort(int[]data){
-
+  // swap largest with last element and push down
+  int size = data.length;
+  // while size of unsorted heap is greater than 0
+  while (size > 0){
+    // swap largest element and the end element
+    int temp = data[size -1];
+    data[size-1] = data[0];
+    data[0] = temp;
+    // subtract size, aka "remove" the largest element that is now at the end
+    size--;
+    // push down the element at the top of the heap
+    pushDown(data,size,0);
+  }
 }
 
 }
