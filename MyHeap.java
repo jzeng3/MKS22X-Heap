@@ -98,14 +98,13 @@ public static void heapify(int[]data){
 
   int index = data.length - 1;
   int parent = (index - 1) / 2;
-  while (index > 0 && parent >= 0){
+  while (parent >= 0){
     pushDown(data,data.length, parent);
-    index = parent;
-    parent = (index - 1) / 2;
+    parent -= 1;
     System.out.println("push down: "+Arrays.toString(data));
   }
   // for the top element, push down
-  pushDown(data,data.length,0);
+
   System.out.println("push down: "+Arrays.toString(data));
 }
 
