@@ -7,6 +7,9 @@ public class MyHeap{
     System.out.println( Arrays.toString(a));
     pushUp(a, 1);
     System.out.println( Arrays.toString(a));
+    int[] b = {1,3,5,7,9,10,11};
+    pushUp(b, 6);
+    System.out.println( Arrays.toString(b));
   }
   /*
      - size  is the number of elements in the data array.
@@ -70,9 +73,10 @@ private static void pushUp(int[]data,int index){
     data[parent] = data[index];
     data[index] = temp;
     index = parent;
+    System.out.println("New index: "+index);
+    parent = (index - 1) / 2;
+      System.out.println("updated parent index: "+parent);
   }
-  parent = (index - 1) / 2;
-  System.out.println("updated parent index: "+parent);
 }
 
 
