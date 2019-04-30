@@ -10,11 +10,14 @@ public class MyHeap{
     int[] b = {1,3,5,7,9,10,11};
     pushUp(b, 6);
     System.out.println( Arrays.toString(b));
-    int[] c = {8,2,0,4,5,6,9};
+    int[] c = {8,2,0,4,5,6,9,5,4,23,5,7,9,0,2,3,5,3,5,8};
     heapify(c);
     System.out.println( Arrays.toString(c));
     heapsort(c);
     System.out.println( Arrays.toString(c));
+    int[] d = {47, 15, 57, 74, 19, 16, 95, 52, 26, 10};
+    heapsort(d);
+    System.out.println( Arrays.toString(d));
   }
   /*
      - size  is the number of elements in the data array.
@@ -31,10 +34,10 @@ public class MyHeap{
     // while indices are valid and children are larger than element at given index
     while (child1 < size && data[child1] > data[index]
         || child2 < size && data[child2] > data[index]){
-     //  System.out.println("Inside while statement");
+
      // if there is only one child, which is larger
       if (child2 >= size && data[child1] > data[index]){
-      //  System.out.println("There is only 1 child, "+data[child1] );
+
         int temp = data[child1];
         data[child1] = data[index];
         data[index] = temp;
@@ -42,16 +45,16 @@ public class MyHeap{
       }
      // if there are two children
      else if (child1 < size && child2 < size){
-      // System.out.println("There are 2 children, "+data[child1]+", "+data[child2] );
+
        if (data[child1] >= data[child2]){
-      //    System.out.println("Child 1 is larger, "+data[child1]+" >= "+data[child2] );
+
          int temp = data[child1];
          data[child1] = data[index];
          data[index] = temp;
          index = child1;
        }
        else{
-        //   System.out.println("Child 2 is larger, "+data[child2]+" > "+data[child1] );
+
          int temp = data[child2];
          data[child2] = data[index];
          data[index] = temp;
@@ -61,7 +64,7 @@ public class MyHeap{
      // update children indices
      child1 = 2*index + 1;
      child2 = child1 + 1;
-    // System.out.println("New children indices: "+child1+", "+child2);
+
     }
   }
 /*
@@ -74,15 +77,15 @@ private static void pushUp(int[]data,int index){
   int parent = (index - 1) / 2;
   // while parent index is valid and parent element is less than element at index
   while (parent >= 0 && data[parent] < data[index]){
-  //  System.out.println("Inside while statement");
+
     // swap parent and child, update parent and child indices
     int temp = data[parent];
     data[parent] = data[index];
     data[index] = temp;
     index = parent;
-  //  System.out.println("New index: "+index);
+
     parent = (index - 1) / 2;
-    //  System.out.println("updated parent index: "+parent);
+
   }
 }
 
@@ -92,12 +95,18 @@ private static void pushUp(int[]data,int index){
     */
 public static void heapify(int[]data){
   // loop through indices from last element (inclusive) to first element (exclusive)
-  for (int i = data.length - 1; i > 0; i--){
-    // push up the element at this index
-    pushUp(data,i);
+
+  int index = data.length - 1;
+  int parent = (index - 1) / 2;
+  while (index > 0 && parent >= 0){
+    pushDown(data,data.length, parent);
+    index = parent;
+    parent = (index - 1) / 2;
+    System.out.println("push down: "+Arrays.toString(data));
   }
   // for the top element, push down
   pushDown(data,data.length,0);
+  System.out.println("push down: "+Arrays.toString(data));
 }
 
 /*
@@ -106,6 +115,9 @@ public static void heapify(int[]data){
  removing the largest value n-1 times (remove places at end of the sub-array).
  */
 public static void heapsort(int[]data){
+  // make array into a valid heap
+  heapify(data);
+  System.out.println("Heap: "+Arrays.toString(data));
   // swap largest with last element and push down
   int size = data.length;
   // while size of unsorted heap is greater than 0
